@@ -1,0 +1,34 @@
+[package]
+name = "usage"
+version = "0.2.0"
+edition = "2024"
+authors = ["aquilesfd"]
+description = "Local multi-provider AI usage dashboard + COSMIC panel applet"
+
+[lib]
+name = "usage"
+path = "src/lib.rs"
+
+[[bin]]
+name = "usage"
+path = "src/main.rs"
+
+[[bin]]
+name = "usage-applet"
+path = "src/bin/usage-applet.rs"
+required-features = ["applet"]
+
+[dependencies]
+chrono = "0.4.45"
+libc = "0.2"
+rusqlite = { version = "0.40.2", features = ["bundled"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+libcosmic = { git = "https://github.com/pop-os/libcosmic", optional = true, default-features = false, features = ["applet"] }
+
+[features]
+default = []
+applet = ["dep:libcosmic"]
+
+[profile.release]
+strip = true

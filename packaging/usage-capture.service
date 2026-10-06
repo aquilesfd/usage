@@ -1,0 +1,9 @@
+[Unit]
+Description=Capture local AI provider usage snapshot
+Documentation=file:%h/.local/share/usage/usage.db
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/usage capture
+Nice=10
+IOSchedulingClass=idle
